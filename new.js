@@ -288,3 +288,7 @@ for(const day of days){
 
 }
 
+console.log(restaurant.order?.(0,1)?? 'Method Doesnot Exist');
+const users = [{name:'Jonas', email:'jonas@.com'}];
+console.log(users[1]?.name ?? 'user array empty');
+
