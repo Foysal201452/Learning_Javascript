@@ -104,21 +104,23 @@ const restaurant = {
             to ${address} at ${time}`);
 
     },
-    openingHours: {
-        thu: {
-          open: 12,
-          close: 22,
-        },
-        fri: {
-          open: 11,
-          close: 23,
-        },
-        sat: {
-          open: 0, // Open 24 hours
-          close: 24,
-        },
-      },
     
+    
+};
+
+const openingHours= {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
 };
 
 
@@ -267,8 +269,11 @@ console.log(allPlayers);
 const players1Final = [...players1, 'Thiago', 'Coutinho', 'Periscic'];
 
 //5
-const{odds:{team1,X:draw,team2}} = game;
-console.log(team1,draw,team2);
+// const{odds:{team1,x:draw,team2}} = game;
+// console.log(`Odd of victory Bayern Munichch ${team1}`);
+// console.log(`Odd of draw ${draw}`);
+// console.log(`Odd of victory Brussia Dortmund${team2}`);
+
 
 
 
@@ -280,15 +285,66 @@ printGoals('Davies', 'Muller', 'Lewandowski','Kimmich');
 printGoals('Davis','Muller');
 
 
-const days =['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-for(const day of days){
-  // console.log(day);
-  const open = restaurant.openingHours[day]?.open;
-  console.log(`On ${day}, we open at ${open}`);
+// const days =['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+// for(const day of days){
+//   // console.log(day);
+//   const open = restaurant.openingHours[day]?.open;
+//   console.log(`On ${day}, we open at ${open}`);
 
+// }
+
+// console.log(restaurant.order?.(0,1)?? 'Method Doesnot Exist');
+// const users = [{name:'Jonas', email:'jonas@.com'}];
+// console.log(users[1]?.name ?? 'user array empty');
+
+
+
+
+const properties = Object.keys(openingHours);
+console.log(properties);
+let openstr=`We are open on ${properties.length} days:`;
+for(const day of properties){
+  openstr += `${day},`;
+}
+console.log(openstr);
+
+
+// for(const item of game.scored.entries()){
+//   console.log(item[0]+1,item[1]);// IN array just .entries
+// }
+
+for(const[i, player] of game.scored.entries()){
+  console.log(`Goal ${i+1}: ${player}`);// IN array just .entries
 }
 
-console.log(restaurant.order?.(0,1)?? 'Method Doesnot Exist');
-const users = [{name:'Jonas', email:'jonas@.com'}];
-console.log(users[1]?.name ?? 'user array empty');
 
+
+
+// Challenge 2 
+
+
+
+const{odds:{team1,x:draw,team2}} = game;
+const {t1,t2} = game;
+console.log(`Odd of ${t1} ${team1}`);
+console.log(`Odd of draw ${draw}`);
+console.log(`Odd of ${t2} ${team2}`);
+
+// let message = `Odd of victory Bayern Munich `
+const odds = Object.values(game.odds);// for object.values
+let average = 0;
+for(const odd of odds)average += odd;
+
+average/=odds.length;
+
+console.log(average);
+
+
+
+
+// Little Hard 
+for(const [team,oddsValue] of Object.entries(game.odds)){
+  const teamStr = team === 'x'? 'draw' :` victory ${game[team]}`;
+  console.log(`Odd of ${teamStr} ${oddsValue}`);
+
+}
